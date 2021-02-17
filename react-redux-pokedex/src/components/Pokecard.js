@@ -14,16 +14,44 @@ export default function Pokecard(props){
             })
     }, [])
 
+    const name = pokeman.name;
+    // eslint-disable-next-line no-unused-expressions
+    const capName = name[0].toUpperCase() + name.substring(1);
     
     return(
         <Pokemon>
-            <h3>{pokeman.name}</h3>
-            {pokemon && <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>}
+            <div>
+                <h3>#{pokemon && pokemon.order} - {capName}</h3>
+                {pokemon && <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>}
+            </div>
+            <div>
+                <span>{
+                    pokemon && pokemon.types.forEach(type => {
+                        <p>{type.name}</p>
+                    })
+                }</span>
+            </div>
         </Pokemon>
     )
 }
 
 const Pokemon = styled.div`
-    width: 50%;
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
     border: 1px solid black;
+
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* width: 50%; */
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    h3{
+        font-size: 1.4rem;
+    }
 `

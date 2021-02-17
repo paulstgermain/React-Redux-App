@@ -47,7 +47,7 @@ const StyledApp = styled.div`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    background: rgb(33, 33, 120);
+    background: #3B4CCA;
     color: #FFFFFF;
     box-shadow: 1px 3px 2px rgba(33, 33, 33, 0.5);
   }
