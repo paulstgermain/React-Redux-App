@@ -7,7 +7,7 @@ export const FETCH_FAIL = "FETCH_FAIL";
 export const getPokemans = () => dispatch => {
     dispatch({type: FETCH_START});
 
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=25')
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=151')
         .then(res => {
             dispatch({type: FETCH_SUCCESS, payload: res.data.results})
         })
