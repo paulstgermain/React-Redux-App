@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 export default function Pokecard(props){
     const [pokemon, setPokemon] = useState(null);
+    const [flavorText, setFlavorText] = useState(null);
 
     const {pokeman} = props;
 
@@ -12,7 +13,20 @@ export default function Pokecard(props){
             .then(res => {
                 setPokemon(res.data)
             })
+            .catch(err => {
+                console.log(err);
+            })
     }, [])
+
+    useEffect(() => {
+        pokemon && axios.get(`${pokemon.species.url}`)
+            .then(res => {
+                setFlavorText(res.data.flavor_text_entries[0].flavor_text)
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }, [pokemon])
 
     const name = pokeman.name;
     // eslint-disable-next-line no-unused-expressions
@@ -20,35 +34,43 @@ export default function Pokecard(props){
     
     return(
         <Pokemon>
-            <div>
-                <h3>#{pokemon && pokemon.order} - {capName}</h3>
+            <div className='pokeImg'>
+                <h3>#{pokemon && pokemon.id} - {capName}</h3>
                 {pokemon && <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>}
             </div>
-            <div>
-                <span>{
-                    pokemon && pokemon.types.forEach(type => {
-                        <p>{type.name}</p>
-                    })
-                }</span>
+            <div className='pokeInfo'>
+                {
+                    flavorText && <p>{flavorText.replace(/\f/g, ' ')}</p>
+                }
             </div>
         </Pokemon>
     )
 }
 
 const Pokemon = styled.div`
-    width: 45%;
+    width: 30%;
     display: flex;
     flex-direction: row;
     margin-bottom: 5%;
-    border: 1px solid black;
+    border: 3px double black;
+    background: #D3D3D3;
 
-    div{
+    .pokeImg{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        /* width: 50%; */
-        border: 1px solid black;
+        width: 30%;
+        border-right: 1px solid black;
         text-align: center;
+    }
+
+    .pokeInfo{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+        text-align: center;
+        font-size: 1.4rem;
     }
 
     h3{

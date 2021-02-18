@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Pokedex from './components/Pokedex';
-import { getPokemans } from './actions';
+import { getPokemans, getGenTwo, getGenThree, getGenFour } from './actions';
 
 import styled from 'styled-components';
 
@@ -11,11 +11,29 @@ function App(props) {
     props.getPokemans();
   }
 
+  const catchGenTwo = e => {
+    e.preventDefault();
+    props.getGenTwo();
+  }
+
+  const catchGenThree = e => {
+    e.preventDefault();
+    props.getGenThree();
+  }
+
+  const catchGenFour = e => {
+    e.preventDefault();
+    props.getGenFour();
+  }
+
   return (
     <StyledApp>
       <div className='header'>
         <h2>Welcome to the React/Redux Pokedex!</h2>
         <button onClick={catchPokemon}>Get Some Pokemon!</button>
+        <button onClick={catchGenTwo}>Gen 2 Anyone?</button>
+        <button onClick={catchGenThree}>Gen 3</button>
+        <button onClick={catchGenFour}>Gen 4</button>
       </div>
       {props.pokemans && <Pokedex pokemans={props.pokemans} />}
     </StyledApp>
@@ -30,7 +48,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getPokemans })(App);
+export default connect(mapStateToProps, { getPokemans, getGenTwo, getGenThree, getGenFour })(App);
 
 
 const StyledApp = styled.div`
@@ -51,6 +69,8 @@ const StyledApp = styled.div`
     color: #FFFFFF;
     box-shadow: 1px 3px 2px rgba(33, 33, 33, 0.5);
   }
+
+  /*#3B4CCA*/
   
   .header h2{
     font-size: 2.4rem;

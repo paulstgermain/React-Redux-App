@@ -1,4 +1,4 @@
-import { FETCH_START, FETCH_SUCCESS, FETCH_FAIL } from '../actions';
+import { FETCH_START, FETCH_SUCCESS, FETCH_FAIL, GEN_RESET } from '../actions';
 
 const initialState = {
     pokemans: null,
@@ -28,6 +28,12 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     error: `Received error ${action.payload}`,
                     isFetching: false
+                }
+
+            case GEN_RESET:
+                return{
+                    ...state,
+                    pokemans: null
                 }
 
             default:
