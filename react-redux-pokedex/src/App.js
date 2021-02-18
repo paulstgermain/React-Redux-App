@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Pokedex from './components/Pokedex';
-import { getPokemans, getGenTwo, getGenThree, getGenFour } from './actions';
+import { getPokemans, getGenTwo, getGenThree, getGenFour, getGenFive, getGenSix, getGenSeven, getGenEight } from './actions';
 
 import styled from 'styled-components';
 
@@ -26,14 +26,38 @@ function App(props) {
     props.getGenFour();
   }
 
+  const catchGenFive = e => {
+    e.preventDefault();
+    props.getGenFive();
+  }
+
+  const catchGenSix = e => {
+    e.preventDefault();
+    props.getGenSix();
+  }
+
+  const catchGenSeven = e => {
+    e.preventDefault();
+    props.getGenSeven();
+  }
+
+  const catchGenEight = e => {
+    e.preventDefault();
+    props.getGenEight();
+  }
+
   return (
     <StyledApp>
       <div className='header'>
         <h2>Welcome to the React/Redux Pokedex!</h2>
-        <button onClick={catchPokemon}>Get Some Pokemon!</button>
-        <button onClick={catchGenTwo}>Gen 2 Anyone?</button>
+        <button onClick={catchPokemon}>Gen 1</button>
+        <button onClick={catchGenTwo}>Gen 2</button>
         <button onClick={catchGenThree}>Gen 3</button>
         <button onClick={catchGenFour}>Gen 4</button>
+        <button onClick={catchGenFive}>Gen 5</button>
+        <button onClick={catchGenSix}>Gen 6</button>
+        <button onClick={catchGenSeven}>Gen 7</button>
+        <button onClick={catchGenEight}>Gen 8</button>
       </div>
       {props.pokemans && <Pokedex pokemans={props.pokemans} />}
     </StyledApp>
@@ -48,7 +72,7 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { getPokemans, getGenTwo, getGenThree, getGenFour })(App);
+export default connect(mapStateToProps, { getPokemans, getGenTwo, getGenThree, getGenFour, getGenFive, getGenSix, getGenSeven, getGenEight })(App);
 
 
 const StyledApp = styled.div`

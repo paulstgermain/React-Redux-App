@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import loader from '../assets/35.gif';
 
 export default function Pokecard(props){
     const [pokemon, setPokemon] = useState(null);
@@ -36,11 +37,11 @@ export default function Pokecard(props){
         <Pokemon>
             <div className='pokeImg'>
                 <h3>#{pokemon && pokemon.id} - {capName}</h3>
-                {pokemon && <img src={pokemon.sprites.front_default} alt={pokemon.name}></img>}
+                {pokemon ? <img src={pokemon.sprites.front_default} alt={pokemon.name}></img> : <img className='loading' src={loader} alt='loading'></img>}
             </div>
             <div className='pokeInfo'>
                 {
-                    flavorText && <p>{flavorText.replace(/\f/g, ' ')}</p>
+                    flavorText ? <p>{flavorText.replace(/\f/g, ' ')}</p> : <img className='loading' src={loader} alt='loading'></img>
                 }
             </div>
         </Pokemon>
@@ -76,4 +77,11 @@ const Pokemon = styled.div`
     h3{
         font-size: 1.4rem;
     }
+
+    .loading{
+        width: 65px;
+        height: 65px;
+        text-align: center;
+    }
 `
+
